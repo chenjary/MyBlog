@@ -206,7 +206,7 @@
             url : '/admin/setting/backup',
             data: param,
             success: function (result) {
-                if(result && result.success){
+                if(result.success){
                     if(result.payload && result.payload.attach_path){
                         swal('备份成功', '您的附件备份在 <mark>'+ result.payload.attach_path +'</mark><br/><br/>' +
                             '主题备份存储在 <mark>'+ result.payload.theme_path +'</mark>', 'success');
