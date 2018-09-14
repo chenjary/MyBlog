@@ -6,7 +6,8 @@
     <groupId>com.chenjay.blog</groupId>
     <artifactId>chenjay</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <!--<packaging>jar</packaging>-->
+    <packaging>war</packaging>
 
     <name>chenjay</name>
     <description>My First Blog</description>
