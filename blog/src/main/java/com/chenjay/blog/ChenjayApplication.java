@@ -21,12 +21,12 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @MapperScan("com.chenjay.blog.dao")
 @EnableTransactionManagement
-public class ChenjayApplication extends SpringBootServletInitializer {
+public class ChenjayApplication /*extends SpringBootServletInitializer*/ {
 
-    @Override
+   /* @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ChenjayApplication.class);
-    }
+    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(ChenjayApplication.class, args);
