@@ -46,10 +46,10 @@
                 <ul class="nav navbar-nav navbar-right pull-right">
                     <li class="dropdown">
                         <a th:href="@{index.html}" class="dropdown-toggle profile" data-toggle="dropdown"
-                           aria-expanded="true"><img th:src="${commons.gravatar(session.login_user.email)}" alt="user-img"
+                           aria-expanded="true"><img th:src="@{/admin/images/logo.png}" alt="user-img"
                                                      class="img-circle"/> </a>
                         <ul class="dropdown-menu">
-                            <li><a th:href="@{${commons.site_url()}}" target="_blank"><i class="fa fa-eye"
+                            <li><a th:href="@{${commons.site_url('/')}}" target="_blank"><i class="fa fa-eye"
                                                                                          aria-hidden="true"></i>
                                 查看网站</a></li>
                             <li><a th:href="@{/admin/profile}"><i class="fa fa-sun-o"></i> 个人设置</a></li>
