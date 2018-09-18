@@ -1,5 +1,7 @@
 package com.chenjay.blog.service;
 
+import org.thymeleaf.context.Context;
+
 /**
  * @author tangj
  * @date 2018/5/3 22:06
@@ -21,7 +23,7 @@ public interface IMailService {
      * @param subject
      * @param content
      */
-    void sendHtmlMail(String to, String subject, String content);
+    void sendHtmlMail(String to, String subject, String template, Context context);
 
     /**
      * 发送带附件的邮件

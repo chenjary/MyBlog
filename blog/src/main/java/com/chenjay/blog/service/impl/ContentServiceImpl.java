@@ -28,7 +28,7 @@ import java.util.List;
  * Created by Administrator on 2017/3/13 013.
  */
 @Service
-public class ContentServiceImpl implements IContentService {
+public class ContentServiceImpl /*implements IContentService */{
     private static final Logger LOGGER = LoggerFactory.getLogger(ContentServiceImpl.class);
 
     @Resource
@@ -43,7 +43,7 @@ public class ContentServiceImpl implements IContentService {
     @Resource
     private IMetaService metasService;
 
-    @Override
+    //@Override
     public void publish(ContentVo contents) {
         if (null == contents) {
             throw new TipException("文章对象为空");
@@ -95,7 +95,7 @@ public class ContentServiceImpl implements IContentService {
         metasService.saveMetas(cid, categories, Types.CATEGORY.getType());
     }
 
-    @Override
+   // @Override
     public PageInfo<ContentVo> getContents(Integer p, Integer limit) {
         LOGGER.debug("Enter getContents method");
         ContentVoExample example = new ContentVoExample();
@@ -108,7 +108,7 @@ public class ContentServiceImpl implements IContentService {
         return pageInfo;
     }
 
-    @Override
+   // @Override
     public ContentVo getContents(String id) {
         if (StringUtils.isNotBlank(id)) {
             if (Tools.isNumber(id)) {
@@ -131,14 +131,14 @@ public class ContentServiceImpl implements IContentService {
         return null;
     }
 
-    @Override
+    //@Override
     public void updateContentByCid(ContentVo contentVo) {
         if (null != contentVo && null != contentVo.getCid()) {
             contentDao.updateByPrimaryKeySelective(contentVo);
         }
     }
 
-    @Override
+    //@Override
     public PageInfo<ContentVo> getArticles(Integer mid, int page, int limit) {
         int total = metaDao.countWithSql(mid);
         PageHelper.startPage(page, limit);
@@ -148,7 +148,7 @@ public class ContentServiceImpl implements IContentService {
         return paginator;
     }
 
-    @Override
+   // @Override
     public PageInfo<ContentVo> getArticles(String keyword, Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
         ContentVoExample contentVoExample = new ContentVoExample();
@@ -161,14 +161,14 @@ public class ContentServiceImpl implements IContentService {
         return new PageInfo<>(contentVos);
     }
 
-    @Override
+   // @Override
     public PageInfo<ContentVo> getArticlesWithpage(ContentVoExample commentVoExample, Integer page, Integer limit) {
         PageHelper.startPage(page, limit);
         List<ContentVo> contentVos = contentDao.selectByExampleWithBLOBs(commentVoExample);
         return new PageInfo<>(contentVos);
     }
 
-    @Override
+   // @Override
     public void deleteByCid(Integer cid) {
         ContentVo contents = this.getContents(cid + "");
         if (null != contents) {
@@ -177,7 +177,7 @@ public class ContentServiceImpl implements IContentService {
         }
     }
 
-    @Override
+    //@Override
     public void updateCategory(String ordinal, String newCatefory) {
         ContentVo contentVo = new ContentVo();
         contentVo.setCategories(newCatefory);
@@ -186,7 +186,7 @@ public class ContentServiceImpl implements IContentService {
         contentDao.updateByExampleSelective(contentVo, example);
     }
 
-    @Override
+   // @Override
     public void updateArticle(ContentVo contents) {
         if (null == contents || null == contents.getCid()) {
             throw new TipException("文章对象不能为空");

@@ -113,7 +113,8 @@ public class SiteServiceImpl implements ISiteService {
                     file.mkdirs();
                 }
             }
-            String sqlFileName = "tale_" + DateKit.dateFormat(new Date(), fmt) + "_" + TaleUtils.getRandomNumber(5) + ".sql";
+            String sqlFileName = "blog_" + DateKit.dateFormat(new Date(), fmt) + "_" + TaleUtils.getRandomNumber(5) +
+                    ".sql";
             String zipFile = sqlFileName.replace(".sql", ".zip");
 
             Backup backup = new Backup(TaleUtils.getNewDataSource().getConnection());

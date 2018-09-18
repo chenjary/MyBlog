@@ -5,12 +5,13 @@ import com.chenjay.blog.service.ILogService;
 import com.chenjay.blog.service.IMailService;
 import com.chenjay.blog.utils.DateKit;
 import com.sun.management.OperatingSystemMXBean;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
 import java.lang.management.ManagementFactory;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -22,13 +23,13 @@ public class ScheduleTask {
     @Resource
     IMailService mailService;
 
-    @Value("${spring.mail.username}")
-    private String mailTo;
+    private static final String MAIL_TO = "chenjie_task@163.com";
 
     @Scheduled(fixedRate = 86400000)
     public void process(){
-        StringBuffer result = new StringBuffer();
+      /*  StringBuffer result = new StringBuffer();
         long totalMemory = Runtime.getRuntime().totalMemory();
+        result.append("<h1>博客系统运行情况</h1>");
         result.append("使用的总内存为："+totalMemory/(1024*1024)+"MB").append("\n");
         result.append("内存使用率为："+getMemery()).append("\n");
         List<LogVo> logVoList = logService.getLogs(0,5);
@@ -37,7 +38,21 @@ public class ScheduleTask {
             result.append(" 操作: ").append(logVo.getAction());
             result.append(" IP： ").append(logVo.getIp()).append("\n");
         }
-        mailService.sendSimpleEmail(mailTo,"博客系统运行情况",result.toString());
+        mailService.sendHtmlMail(MAIL_TO,"博客系统运行情况",result.toString());*/
+
+
+        String template = "mail/InternalServerErrorTemplate";
+        Context context = new Context();
+
+
+        context.setVariable("username", "HelloWood");
+        context.setVariable("methodName", "cn.com.hellowood.mail.MailUtilTests.sendTemplateEmail()");
+        context.setVariable("occurredTime", new Date());
+
+        mailService.sendHtmlMail(MAIL_TO,"博客系统运行情况",template,context);
+
+
+
     }
 
     public static String getMemery() {

@@ -276,7 +276,7 @@ public final class Commons {
     public static String show_thumb(ContentVo contents) {
         int cid = contents.getCid();
         int size = cid % 20;
-        size = size == 0 ? 1 : size;
+        size = size == 0 ? 20 : size;
         return "/user/img/rand/" + size + ".jpg";
     }
 

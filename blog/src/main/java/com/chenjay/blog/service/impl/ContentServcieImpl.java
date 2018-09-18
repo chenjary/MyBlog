@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/1/24 21:21
  */
 @Service
-public class ContentServcieImpl2 implements IContentService {
+public class ContentServcieImpl implements IContentService {
 
     @Resource
     private ContentVoMapper contentDao;

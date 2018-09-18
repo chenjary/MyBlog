@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 
 import javax.annotation.Resource;
@@ -58,16 +59,21 @@ public class MailServiceImpl implements IMailService {
      * @param content
      */
     @Override
-    public void sendHtmlMail(String to, String subject, String content) {
+    public void sendHtmlMail(String to, String subject, String template, Context context) {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         try {
-            //true表示需要创建一个multipart message
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
-            helper.setFrom(mailFrom);
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(content,true);
-            mailSender.send(mimeMessage);
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper messageHelper = new MimeMessageHelper(message);
+
+            String content = templateEngine.process(template, context);
+            messageHelper.setFrom(mailFrom);
+            messageHelper.setTo(to);
+            messageHelper.setSubject(subject);
+            messageHelper.setText(content, true);
+            mailSender.send(message);
+
+
+
         } catch (MessagingException e) {
             e.printStackTrace();
         }
