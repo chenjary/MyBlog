@@ -3,6 +3,7 @@ package com.chenjay.blog.modal.Bo;
 import java.io.Serializable;
 
 /**
+ * @author Chenjie
  * 后台统计对象
  */
 public class StatisticsBo implements Serializable {

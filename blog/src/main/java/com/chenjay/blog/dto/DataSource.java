@@ -1,8 +1,9 @@
 package com.chenjay.blog.dto;
 
 /**
+ * @author Chenjie
  * 建立数据库连接的参数对象
- * Created by BlueT on 2017/3/4.
+ * Created on 2017/3/4.
  */
 public class DataSource {
 

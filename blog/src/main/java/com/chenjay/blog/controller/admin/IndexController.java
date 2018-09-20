@@ -28,8 +28,9 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
+ * @author Chenjie
  * 后台管理首页
- * Created by Administrator on 2017/3/9 009.
+ * Created on 2017/3/9 009.
  */
 @Controller("adminIndexController")
 @RequestMapping("/admin")

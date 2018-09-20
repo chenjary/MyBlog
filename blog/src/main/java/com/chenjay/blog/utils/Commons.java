@@ -84,7 +84,7 @@ public final class Commons {
         if (StringUtils.isBlank(key)) {
             return "";
         }
-        String str = WebConst.initConfig.get(key);
+        String str = WebConst.INIT_CONFIG.get(key);
         if (StringUtils.isNotBlank(str)) {
             return str;
         } else {
@@ -206,7 +206,7 @@ public final class Commons {
     public static String show_categories(String categories) throws UnsupportedEncodingException {
         if (StringUtils.isNotBlank(categories)) {
             String[] arr = categories.split(",");
-            StringBuffer sbuf = new StringBuffer();
+            StringBuilder sbuf = new StringBuilder();
             for (String c : arr) {
                 sbuf.append("<a href=\"/category/" + URLEncoder.encode(c, "UTF-8") + "\">" + c + "</a>");
             }
@@ -224,7 +224,7 @@ public final class Commons {
     public static String show_tags(String tags) throws UnsupportedEncodingException {
         if (StringUtils.isNotBlank(tags)) {
             String[] arr = tags.split(",");
-            StringBuffer sbuf = new StringBuffer();
+            StringBuilder sbuf = new StringBuilder();
             for (String c : arr) {
                 sbuf.append("<a href=\"/tag/" + URLEncoder.encode(c, "UTF-8") + "\">" + c + "</a>");
             }
@@ -337,10 +337,10 @@ public final class Commons {
     public static Map<String, String> social() {
         final String prefix = "social_";
         Map<String, String> map = new HashMap<>();
-        map.put("weibo", WebConst.initConfig.get(prefix + "weibo"));
-        map.put("zhihu", WebConst.initConfig.get(prefix + "zhihu"));
-        map.put("github", WebConst.initConfig.get(prefix + "github"));
-        map.put("twitter", WebConst.initConfig.get(prefix + "twitter"));
+        map.put("weibo", WebConst.INIT_CONFIG.get(prefix + "weibo"));
+        map.put("zhihu", WebConst.INIT_CONFIG.get(prefix + "zhihu"));
+        map.put("github", WebConst.INIT_CONFIG.get(prefix + "github"));
+        map.put("twitter", WebConst.INIT_CONFIG.get(prefix + "twitter"));
         return map;
     }
 

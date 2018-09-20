@@ -3,26 +3,28 @@ package com.chenjay.blog.constant;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
- * Created by BlueT on 2017/3/3.
+ * @author Chenjie
+ * Created on 2017/3/3.
  */
 @Component
 public class WebConst {
-    public static Map<String, String> initConfig = new HashMap<>();
 
+    private WebConst() {
+    }
 
-    public static String LOGIN_SESSION_KEY = "login_user";
+    public static Map<String, String> INIT_CONFIG = new HashMap<>();
+
+    public static final String LOGIN_SESSION_KEY = "login_user";
 
     public static final String USER_IN_COOKIE = "S_L_ID";
 
     /**
      * aes加密加盐
      */
-    public static String AES_SALT = "0123456789abcdef";
+    public static final String AES_SALT = "0123456789abcdef";
 
     /**
      * 最大获取文章条数
@@ -52,5 +54,5 @@ public class WebConst {
     /**
      * 上传文件最大10M
      */
-    public static Integer MAX_FILE_SIZE = 10485760;
+    public static final Integer MAX_FILE_SIZE = 10485760;
 }

@@ -10,8 +10,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import javax.annotation.Resource;
 
 /**
+ * @author Chenjie
  * 向mvc中添加自定义组件
- * Created by BlueT on 2017/3/9.
+ * Created on 2017/3/9.
  */
 @Component
 public class WebMvcConfig extends WebMvcConfigurerAdapter {

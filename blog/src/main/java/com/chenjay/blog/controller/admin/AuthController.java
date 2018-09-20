@@ -24,8 +24,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
+ * @author Chenjie
  * 用户后台登录/登出
- * Created by BlueT on 2017/3/11.
+ * Created on 2017/3/11.
  */
 @Controller
 @RequestMapping("/admin")
@@ -49,24 +50,24 @@ public class AuthController extends BaseController {
     @ResponseBody
     public RestResponseBo doLogin(@RequestParam String username,
                                   @RequestParam String password,
-                                  @RequestParam(required = false) String remeber_me,
+                                  @RequestParam(required = false) String remeberMe,
                                   HttpServletRequest request,
                                   HttpServletResponse response) {
 
-        Integer error_count = cache.get("login_error_count");
+        Integer errorCount = cache.get("login_error_count");
         try {
             UserVo user = usersService.login(username, password);
             request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, user);
-            if (StringUtils.isNotBlank(remeber_me)) {
+            if (StringUtils.isNotBlank(remeberMe)) {
                 BlogUtils.setCookie(response, user.getUid());
             }
             logService.insertLog(LogActions.LOGIN.getAction(), null, request.getRemoteAddr(), user.getUid());
         } catch (Exception e) {
-            error_count = null == error_count ? 1 : error_count + 1;
-            if (error_count > 3) {
+            errorCount = null == errorCount ? 1 : errorCount + 1;
+            if (errorCount > 3) {
                 return RestResponseBo.fail("您输入密码已经错误超过3次，请10分钟后尝试");
             }
-            cache.set("login_error_count", error_count, 10 * 60);
+            cache.set("login_error_count", errorCount, (10 * 60));
             String msg = "登录失败";
             if (e instanceof TipException) {
                 msg = e.getMessage();
@@ -88,6 +89,7 @@ public class AuthController extends BaseController {
     public void logout(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
         session.removeAttribute(WebConst.LOGIN_SESSION_KEY);
         Cookie cookie = new Cookie(WebConst.USER_IN_COOKIE, "");
+        cookie.setSecure(true);
         cookie.setValue(null);
         cookie.setMaxAge(0);// 立即销毁cookie
         cookie.setPath("/");

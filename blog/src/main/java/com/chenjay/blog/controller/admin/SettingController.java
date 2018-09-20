@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * @author Chenjie
  * Created by wangq on 2017/3/20.
  */
 @Controller
@@ -64,7 +65,7 @@ public class SettingController extends BaseController {
     @PostMapping(value = "")
     @ResponseBody
     @Transactional(rollbackFor = TipException.class)
-    public RestResponseBo saveSetting(@RequestParam(required = false) String site_theme, HttpServletRequest request) {
+    public RestResponseBo saveSetting(@RequestParam(required = false) String siteTheme, HttpServletRequest request) {
         try {
             Map<String, String[]> parameterMap = request.getParameterMap();
             Map<String, String> querys = new HashMap<>();
@@ -74,10 +75,10 @@ public class SettingController extends BaseController {
 
             optionService.saveOptions(querys);
 
-            WebConst.initConfig = querys;
+            WebConst.INIT_CONFIG = querys;
 
-            if (StringUtils.isNotBlank(site_theme)) {
-                BaseController.THEME = "themes/" + site_theme;
+            if (StringUtils.isNotBlank(siteTheme)) {
+                BaseController.THEME = "themes/" + siteTheme;
             }
             logService.insertLog(LogActions.SYS_SETTING.getAction(), GsonUtils.toJsonString(querys), request.getRemoteAddr(), this.getUid(request));
             return RestResponseBo.ok();

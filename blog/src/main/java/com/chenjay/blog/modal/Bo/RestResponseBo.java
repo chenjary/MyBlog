@@ -1,8 +1,9 @@
 package com.chenjay.blog.modal.Bo;
 
 /**
+ *
+ * @author Chenjie
  * rest返回对象
- *^
  * @param <T>
  */
 public class RestResponseBo<T> {

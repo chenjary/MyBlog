@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -30,9 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Chenjie
  * 附件管理
  *
- * Created by 13 on 2017/2/21.
+ * Created on 2017/2/21.
  */
 @Controller
 @RequestMapping("admin/attach")
