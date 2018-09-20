@@ -4,7 +4,7 @@ import com.chenjay.blog.dao.UserVoMapper;
 import com.chenjay.blog.exception.TipException;
 import com.chenjay.blog.modal.Vo.UserVo;
 import com.chenjay.blog.service.IUserService;
-import com.chenjay.blog.utils.TaleUtils;
+import com.chenjay.blog.utils.BlogUtils;
 import com.chenjay.blog.modal.Vo.UserVoExample;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
         Integer uid = null;
         if (StringUtils.isNotBlank(userVo.getUsername()) && StringUtils.isNotBlank(userVo.getEmail())) {
 //            用户密码加密
-            String encodePwd = TaleUtils.MD5encode(userVo.getUsername() + userVo.getPassword());
+            String encodePwd = BlogUtils.MD5encode(userVo.getUsername() + userVo.getPassword());
             userVo.setPassword(encodePwd);
              userDao.insertSelective(userVo);
         }
@@ -57,7 +57,7 @@ public class UserServiceImpl implements IUserService {
         if (count < 1) {
             throw new TipException("不存在该用户");
         }
-        String pwd = TaleUtils.MD5encode(username+password);
+        String pwd = BlogUtils.MD5encode(username+password);
         criteria.andPasswordEqualTo(pwd);
         List<UserVo> userVos = userDao.selectByExample(example);
         if (userVos.size()!=1) {

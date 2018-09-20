@@ -1,7 +1,6 @@
 package com.chenjay.blog.controller.admin;
 
 import com.github.pagehelper.PageInfo;
-import com.vdurmont.emoji.EmojiParser;
 import com.chenjay.blog.controller.BaseController;
 import com.chenjay.blog.exception.TipException;
 import com.chenjay.blog.modal.Bo.RestResponseBo;
@@ -9,8 +8,6 @@ import com.chenjay.blog.modal.Vo.CommentVo;
 import com.chenjay.blog.modal.Vo.CommentVoExample;
 import com.chenjay.blog.modal.Vo.UserVo;
 import com.chenjay.blog.service.ICommentService;
-import com.chenjay.blog.utils.TaleUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

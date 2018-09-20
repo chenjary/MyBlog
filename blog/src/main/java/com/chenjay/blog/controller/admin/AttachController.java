@@ -12,7 +12,7 @@ import com.chenjay.blog.modal.Vo.UserVo;
 import com.chenjay.blog.service.IAttachService;
 import com.chenjay.blog.service.ILogService;
 import com.chenjay.blog.utils.Commons;
-import com.chenjay.blog.utils.TaleUtils;
+import com.chenjay.blog.utils.BlogUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class AttachController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AttachController.class);
 
-    public static final String CLASSPATH = TaleUtils.getUplodFilePath();
+    public static final String CLASSPATH = BlogUtils.getUplodFilePath();
 
     @Resource
     private IAttachService attachService;
@@ -83,8 +83,8 @@ public class AttachController extends BaseController {
             for (MultipartFile multipartFile : multipartFiles) {
                 String fname = multipartFile.getOriginalFilename();
                 if (multipartFile.getSize() <= WebConst.MAX_FILE_SIZE) {
-                    String fkey = TaleUtils.getFileKey(fname);
-                    String ftype = TaleUtils.isImage(multipartFile.getInputStream()) ? Types.IMAGE.getType() : Types.FILE.getType();
+                    String fkey = BlogUtils.getFileKey(fname);
+                    String ftype = BlogUtils.isImage(multipartFile.getInputStream()) ? Types.IMAGE.getType() : Types.FILE.getType();
                     File file = new File(CLASSPATH+fkey);
                     try {
                         FileCopyUtils.copy(multipartFile.getInputStream(),new FileOutputStream(file));

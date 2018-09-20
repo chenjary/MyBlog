@@ -16,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 自定义拦截器
@@ -51,9 +49,9 @@ public class BaseInterceptor implements HandlerInterceptor {
 
 
         //请求拦截处理
-        UserVo user = TaleUtils.getLoginUser(request);
+        UserVo user = BlogUtils.getLoginUser(request);
         if (null == user) {
-            Integer uid = TaleUtils.getCookieUid(request);
+            Integer uid = BlogUtils.getCookieUid(request);
             if (null != uid) {
                 //这里还是有安全隐患,cookie是可以伪造的
                 user = userService.queryUserById(uid);

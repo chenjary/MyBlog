@@ -14,7 +14,7 @@ import com.chenjay.blog.modal.Vo.UserVo;
 import com.chenjay.blog.service.ILogService;
 import com.chenjay.blog.service.IUserService;
 import com.chenjay.blog.utils.GsonUtils;
-import com.chenjay.blog.utils.TaleUtils;
+import com.chenjay.blog.utils.BlogUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,7 +113,7 @@ public class IndexController extends BaseController {
             return RestResponseBo.fail("请确认信息输入完整");
         }
 
-        if (!users.getPassword().equals(TaleUtils.MD5encode(users.getUsername() + oldPassword))) {
+        if (!users.getPassword().equals(BlogUtils.MD5encode(users.getUsername() + oldPassword))) {
             return RestResponseBo.fail("旧密码错误");
         }
         if (password.length() < 6 || password.length() > 14) {
@@ -123,7 +123,7 @@ public class IndexController extends BaseController {
         try {
             UserVo temp = new UserVo();
             temp.setUid(users.getUid());
-            String pwd = TaleUtils.MD5encode(users.getUsername() + password);
+            String pwd = BlogUtils.MD5encode(users.getUsername() + password);
             temp.setPassword(pwd);
             userService.updateByUid(temp);
             logService.insertLog(LogActions.UP_PWD.getAction(), null, request.getRemoteAddr(), this.getUid(request));

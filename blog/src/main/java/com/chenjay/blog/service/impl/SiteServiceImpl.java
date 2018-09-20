@@ -8,7 +8,7 @@ import com.chenjay.blog.modal.Bo.ArchiveBo;
 import com.chenjay.blog.modal.Vo.*;
 import com.chenjay.blog.service.ISiteService;
 import com.chenjay.blog.utils.DateKit;
-import com.chenjay.blog.utils.TaleUtils;
+import com.chenjay.blog.utils.BlogUtils;
 import com.chenjay.blog.utils.backup.Backup;
 import com.chenjay.blog.constant.WebConst;
 import com.chenjay.blog.controller.admin.AttachController;
@@ -93,7 +93,7 @@ public class SiteServiceImpl implements ISiteService {
             String bkAttachDir = AttachController.CLASSPATH + "upload";
             String bkThemesDir = AttachController.CLASSPATH + "templates/themes";
 
-            String fname = DateKit.dateFormat(new Date(), fmt) + "_" + TaleUtils.getRandomNumber(5) + ".zip";
+            String fname = DateKit.dateFormat(new Date(), fmt) + "_" + BlogUtils.getRandomNumber(5) + ".zip";
 
             String attachPath = bk_path + "/" + "attachs_" + fname;
             String themesPath = bk_path + "/" + "themes_" + fname;
@@ -113,11 +113,11 @@ public class SiteServiceImpl implements ISiteService {
                     file.mkdirs();
                 }
             }
-            String sqlFileName = "blog_" + DateKit.dateFormat(new Date(), fmt) + "_" + TaleUtils.getRandomNumber(5) +
+            String sqlFileName = "blog_" + DateKit.dateFormat(new Date(), fmt) + "_" + BlogUtils.getRandomNumber(5) +
                     ".sql";
             String zipFile = sqlFileName.replace(".sql", ".zip");
 
-            Backup backup = new Backup(TaleUtils.getNewDataSource().getConnection());
+            Backup backup = new Backup(BlogUtils.getNewDataSource().getConnection());
             String sqlContent = backup.execute();
 
             File sqlFile = new File(bkAttachDir + sqlFileName);

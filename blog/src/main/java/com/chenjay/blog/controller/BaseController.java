@@ -1,7 +1,7 @@
 package com.chenjay.blog.controller;
 
 import com.chenjay.blog.modal.Vo.UserVo;
-import com.chenjay.blog.utils.TaleUtils;
+import com.chenjay.blog.utils.BlogUtils;
 import com.chenjay.blog.utils.MapCache;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +40,7 @@ public abstract class BaseController {
      * @return
      */
     public UserVo user(HttpServletRequest request) {
-        return TaleUtils.getLoginUser(request);
+        return BlogUtils.getLoginUser(request);
     }
 
     public Integer getUid(HttpServletRequest request){

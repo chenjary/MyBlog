@@ -8,7 +8,7 @@ import com.chenjay.blog.modal.Bo.RestResponseBo;
 import com.chenjay.blog.modal.Vo.UserVo;
 import com.chenjay.blog.service.ILogService;
 import com.chenjay.blog.service.IUserService;
-import com.chenjay.blog.utils.TaleUtils;
+import com.chenjay.blog.utils.BlogUtils;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -58,7 +58,7 @@ public class AuthController extends BaseController {
             UserVo user = usersService.login(username, password);
             request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, user);
             if (StringUtils.isNotBlank(remeber_me)) {
-                TaleUtils.setCookie(response, user.getUid());
+                BlogUtils.setCookie(response, user.getUid());
             }
             logService.insertLog(LogActions.LOGIN.getAction(), null, request.getRemoteAddr(), user.getUid());
         } catch (Exception e) {

@@ -8,11 +8,10 @@ import com.chenjay.blog.dto.Types;
 import com.chenjay.blog.exception.TipException;
 import com.chenjay.blog.modal.Vo.ContentVo;
 import com.chenjay.blog.modal.Vo.ContentVoExample;
-import com.chenjay.blog.service.IContentService;
 import com.chenjay.blog.service.IMetaService;
 import com.chenjay.blog.service.IRelationshipService;
 import com.chenjay.blog.utils.DateKit;
-import com.chenjay.blog.utils.TaleUtils;
+import com.chenjay.blog.utils.BlogUtils;
 import com.chenjay.blog.utils.Tools;
 import com.vdurmont.emoji.EmojiParser;
 import com.chenjay.blog.dao.ContentVoMapper;
@@ -69,7 +68,7 @@ public class ContentServiceImpl /*implements IContentService */{
             if (contents.getSlug().length() < 5) {
                 throw new TipException("路径太短了");
             }
-            if (!TaleUtils.isPath(contents.getSlug())) throw new TipException("您输入的路径不合法");
+            if (!BlogUtils.isPath(contents.getSlug())) throw new TipException("您输入的路径不合法");
             ContentVoExample contentVoExample = new ContentVoExample();
             contentVoExample.createCriteria().andTypeEqualTo(contents.getType()).andStatusEqualTo(contents.getSlug());
             long count = contentDao.countByExample(contentVoExample);

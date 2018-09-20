@@ -13,7 +13,7 @@ import com.chenjay.blog.modal.Vo.MetaVo;
 import com.chenjay.blog.service.IMetaService;
 import com.chenjay.blog.service.ISiteService;
 import com.chenjay.blog.utils.PatternKit;
-import com.chenjay.blog.utils.TaleUtils;
+import com.chenjay.blog.utils.BlogUtils;
 import com.vdurmont.emoji.EmojiParser;
 import com.chenjay.blog.modal.Bo.CommentBo;
 import com.chenjay.blog.modal.Vo.ContentVo;
@@ -155,7 +155,7 @@ public class IndexController extends BaseController {
      */
     @RequestMapping("logout")
     public void logout(HttpSession session, HttpServletResponse response) {
-        TaleUtils.logout(session, response);
+        BlogUtils.logout(session, response);
     }
 
     /**
@@ -187,7 +187,7 @@ public class IndexController extends BaseController {
             return RestResponseBo.fail("姓名过长");
         }
 
-        if (StringUtils.isNotBlank(mail) && !TaleUtils.isEmail(mail)) {
+        if (StringUtils.isNotBlank(mail) && !BlogUtils.isEmail(mail)) {
             return RestResponseBo.fail("请输入正确的邮箱格式");
         }
 
@@ -205,8 +205,8 @@ public class IndexController extends BaseController {
             return RestResponseBo.fail("您发表评论太快了，请过会再试");
         }
 
-        author = TaleUtils.cleanXSS(author);
-        text = TaleUtils.cleanXSS(text);
+        author = BlogUtils.cleanXSS(author);
+        text = BlogUtils.cleanXSS(text);
 
         author = EmojiParser.parseToAliases(author);
         text = EmojiParser.parseToAliases(text);

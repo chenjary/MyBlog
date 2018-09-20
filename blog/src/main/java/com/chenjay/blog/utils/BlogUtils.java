@@ -41,8 +41,8 @@ import com.chenjay.blog.modal.Vo.UserVo;
  * <p>
  * Created by 13 on 2017/2/21.
  */
-public class TaleUtils {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaleUtils.class);
+public class BlogUtils {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BlogUtils.class);
     /**
      * 一个月
      */
@@ -62,7 +62,7 @@ public class TaleUtils {
     /**
      * 获取文件所在目录
      */
-    private static String location = TaleUtils.class.getClassLoader().getResource("").getPath();
+    private static String location = BlogUtils.class.getClassLoader().getResource("").getPath();
 
     /**
      * 判断是否是邮箱
@@ -124,9 +124,9 @@ public class TaleUtils {
      * @return
      */
     public static DataSource getNewDataSource() {
-        if (newDataSource == null) synchronized (TaleUtils.class) {
+        if (newDataSource == null) synchronized (BlogUtils.class) {
             if (newDataSource == null) {
-                Properties properties = TaleUtils.getPropFromFile("application-jdbc.properties");
+                Properties properties = BlogUtils.getPropFromFile("application-jdbc.properties");
                 if (properties.size() == 0) {
                     return newDataSource;
                 }
@@ -419,7 +419,7 @@ public class TaleUtils {
      * @return
      */
     public static String getUplodFilePath() {
-        String path = TaleUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String path = BlogUtils.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         path = path.substring(1, path.length());
         try {
             path = java.net.URLDecoder.decode(path, "utf-8");

@@ -136,7 +136,7 @@ public final class Commons {
         if (StringUtils.isBlank(email)) {
             email = "user@hanshuai.xin";
         }
-        String hash = TaleUtils.MD5encode(email.trim().toLowerCase());
+        String hash = BlogUtils.MD5encode(email.trim().toLowerCase());
         return avatarUrl + hash + ".png";
     }
 
@@ -244,9 +244,9 @@ public final class Commons {
         int pos = value.indexOf("<!--more-->");
         if (pos != -1) {
             String html = value.substring(0, pos);
-            return TaleUtils.htmlToText(TaleUtils.mdToHtml(html));
+            return BlogUtils.htmlToText(BlogUtils.mdToHtml(html));
         } else {
-            String text = TaleUtils.htmlToText(TaleUtils.mdToHtml(value));
+            String text = BlogUtils.htmlToText(BlogUtils.mdToHtml(value));
             if (text.length() > len) {
                 return text.substring(0, len);
             }
@@ -263,7 +263,7 @@ public final class Commons {
     public static String article(String value) {
         if (StringUtils.isNotBlank(value)) {
             value = value.replace("<!--more-->", "\r\n");
-            return TaleUtils.mdToHtml(value);
+            return BlogUtils.mdToHtml(value);
         }
         return "";
     }
@@ -299,7 +299,7 @@ public final class Commons {
      * @return
      */
     public static String show_thumb(String content) {
-        content = TaleUtils.mdToHtml(content);
+        content = BlogUtils.mdToHtml(content);
         if (content.contains("<img")) {
             String img = "";
             String regEx_img = "<img.*src\\s*=\\s*(.*?)[^>]*?>";
