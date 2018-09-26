@@ -1,5 +1,5 @@
 server:
-  port: 8099
+  port: 8088
 spring:
   profiles:
     # 外置jdbc和log配置文件
@@ -16,7 +16,6 @@ spring:
 
 
 mybatis:
-  #type-aliases-package: springboot.dao
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.chenjay.blog.dao
 
