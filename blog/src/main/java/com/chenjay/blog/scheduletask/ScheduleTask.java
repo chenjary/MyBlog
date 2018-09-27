@@ -11,8 +11,10 @@ import org.thymeleaf.context.Context;
 
 import javax.annotation.Resource;
 import java.lang.management.ManagementFactory;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.PrimitiveIterator;
 
 @Component
 public class ScheduleTask {
@@ -27,27 +29,29 @@ public class ScheduleTask {
 
     @Scheduled(fixedRate = 86400000)
     public void process(){
-      /*  StringBuffer result = new StringBuffer();
+        StringBuffer result = new StringBuffer();
         long totalMemory = Runtime.getRuntime().totalMemory();
-        result.append("<h1>博客系统运行情况</h1>");
-        result.append("使用的总内存为："+totalMemory/(1024*1024)+"MB").append("\n");
-        result.append("内存使用率为："+getMemery()).append("\n");
-        List<LogVo> logVoList = logService.getLogs(0,5);
+
+        String ram = totalMemory / (1024 * 1024) + "MB";
+        List<LogVo> logVoList = logService.getLogs(0,10);
         for (LogVo logVo:logVoList){
             result.append(" 时间: ").append(DateKit.formatDateByUnixTime(logVo.getCreated(),"yyyy-MM-dd HH:mm:ss"));
             result.append(" 操作: ").append(logVo.getAction());
             result.append(" IP： ").append(logVo.getIp()).append("\n");
         }
-        mailService.sendHtmlMail(MAIL_TO,"博客系统运行情况",result.toString());*/
 
+        /*List<LogVo> logs = new ArrayList<>();
+        for (LogVo log : logVoList) {
 
+        }*/
         String template = "mail/InternalServerErrorTemplate";
         Context context = new Context();
 
 
-        context.setVariable("username", "HelloWood");
-        context.setVariable("methodName", "cn.com.hellowood.mail.MailUtilTests.sendTemplateEmail()");
-        context.setVariable("occurredTime", new Date());
+        context.setVariable("ram", ram);
+        context.setVariable("percent", getMemory());
+        context.setVariable("logs", logVoList);
+        context.setVariable("occurredTime", DateKit.dateFormat(new Date()));
 
         mailService.sendHtmlMail(MAIL_TO,"博客系统运行情况",template,context);
 
@@ -55,7 +59,7 @@ public class ScheduleTask {
 
     }
 
-    public static String getMemery() {
+    public static String getMemory() {
 
         OperatingSystemMXBean osmxb = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean.class);
         long totalvirtualMemory = osmxb.getTotalSwapSpaceSize(); // 剩余的物理内存

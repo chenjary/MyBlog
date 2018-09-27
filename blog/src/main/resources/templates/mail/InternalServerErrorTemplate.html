@@ -6,62 +6,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           th:href="@{https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css}"/>
+    <style>
+        body {
+            background-color: rgb(242, 242, 242);
+
+        }
+
+        .container {
+
+        }
+
+        .content {
+            margin: 100px auto;
+            height: 650px;
+            width: 800px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 15px;
+        / / border: 20 px outset red;;
+        }
+
+        .title {
+            text-align: center;
+        / / margin: 5 px;
+        }
+
+        .title img {
+        / / border-radius: 50 px;
+            margin: 15px auto 5px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .line {
+            height: 2px;
+            background-color: rgb(242, 242, 242);
+            width: 650px;
+            margin: 5px auto;
+        }
+
+        .status {
+            width: 650px;
+            margin: 20px auto;
+            font-size: 18px;
+        }
+
+        .status span {
+            color: red;
+        }
+
+        .log {
+            width: 650px;
+            margin: 20px auto 5px;
+            font-size: 15px;
+        }
+
+        .footer {
+            width: 650px;
+            margin: 5px auto;
+
+        }
+
+        .date {
+            float: right;
+        }
+    </style>
+
 </head>
-<style type="text/css">
-    .full-screen {
-        height: fit-content;
-        width: fit-content;
-    }
+<body>
+<div class="container">
+    <div class="content">
+        <div class="title">
+            <img src=""/>
+            <h2>Jay's Blog 运行状态</h2>
+        </div>
 
-    .fixed-page {
-        overflow-x: scroll;
-        overflow-y: scroll;
-    }
+        <div class="line"></div>
 
-    .container {
-        width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-        margin-right: auto;
-        margin-left: auto
-    }
+        <div class="status">
+            博客运行内存为：<span th:text="${ram}">52M</span>
+            内存使用率为：<span th:text="${percent}">76%</span>
+        </div>
+        <div class="log">
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed table-hover">
+                    <tr>
+                        <th>近期操作日志</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th>操作</th>
+                        <th>IP地址</th>
+                        <th>时间</th>
+                    </tr>
 
-    .jumbotron {
-        padding: 2rem 1rem;
-        margin-bottom: 2rem;
-        background-color: #e9ecef;
-        border-radius: .3rem
-    }
+                    <tr class="active" th:each="log : ${logs}">
+                        <td th:text="${log.action}"></td>
+                        <td th:text="${log.ip}"></td>
+                        <td th:text="${log.created}"></td>
+                    </tr>
 
-    .jumbotron-fluid {
-        padding-right: 0;
-        padding-left: 0;
-        border-radius: 0
-    }
-
-</style>
-<body class="fixed-page">
-<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#ffffff"
-       style="font-family:'Microsoft YaHei';">
-    <div class="jumbotron jumbotron-fluid full-screen">
-        <div class="container  full-screen">
-            <h3>Hi,
-                <span th:text="${username}">Developer</span>
-            </h3>
-            <p>There is an exception occurred in method
-                <code style="color: #d57e13;"><span th:text="${methodName}">methodName</span></code>,
-                the error message is :
-            </p>
-            <div>
-            <pre>
-                <code style="font-family: 'Source Code Pro';">
-                    <span th:text="${errorMessage}">Error Message</span>
-                </code>
-            </pre>
+                </table>
             </div>
-            <span th:text="${occurredTime}">occurredTime</span>
+        </div>
+
+        <div class="footer">
+            <div class="date">
+                发送日期：<span th:text="${occurredTime}">2018-05-25 20:23</span>
+            </div>
         </div>
     </div>
-</table>
+</div>
 </body>
 </html>
